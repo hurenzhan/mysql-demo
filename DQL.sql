@@ -32,6 +32,12 @@
 # 分页查询
 -- LIMIT - 分页参数
 
+# 编写顺序
+-- SELECT - FROM - WHERE - GROUP BY - HAVING - ORDER BY - LIMIT
+
+# 执行顺序
+-- FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY - LIMIT
+
 
 use itcast;
 
@@ -67,6 +73,21 @@ SELECT gender, COUNT(*) FROM emp GROUP BY gender; -- 根据 gender 分组并统�
 SELECT gender, AVG(age) FROM emp GROUP BY gender; -- 根据 gender 分组并统计每组 age 的平均值
 SELECT workaddress, COUNT(*) as address_count FROM emp WHERE age < 45 GROUP BY workaddress HAVING address_count > 3; -- 根据 workaddress 分组并统计每组 age 小于 45 的总数, 筛选出总数大于 3 的数据 (HAVING 分组后条件列表)
 
+# 排序查询
+SELECT * FROM emp ORDER BY age ASC; -- 根据 age 升序排序
+SELECT * FROM emp ORDER BY entrydate DESC; -- 根据 entrydate 降序排序
+SELECT * FROM emp ORDER BY age ASC, entrydate DESC; -- 根据 age 升序排序, entrydate 降序排序 (先按 age 排序, age 相同的按 entrydate 排序)
+
+# 分页查询
+SELECT * FROM emp LIMIT 10; -- 查询 emp 表中的前 10 条数据
+SELECT * FROM emp LIMIT 10, 10; -- 查询 emp 表中的第 11 条到第 20 条数据
+
+# 案例
+SELECT * FROM emp WHERE age IN(20, 21, 22, 23) && gender = '女'; -- 查询 age 为 20 或 21 或 22 或 23 且 gender 为女的数据
+SELECT * FROM emp WHERE (gender = '男') && (age BETWEEN 20 AND 40) && (name LIKE '___'); -- 查询 gender 为男且 age 大于等于 20 小于等于 40 且 name 为三个字符的数据
+SELECT gender, COUNT(*) as count FROM emp WHERE age < 60 GROUP BY gender; -- 根据 gender 分组并且统计 age 小于 60 的总数
+SELECT name, age, entrydate FROM emp WHERE age <= 35 ORDER BY age ASC, entrydate DESC; -- 查询 age 小于等于 35 的数据并且根据 age 升序排序, entrydate 降序排序 (先按 age 排序, age 相同的按 entrydate 排序)
+SELECT * FROM emp WHERE gender = '男' && age BETWEEN 20 AND 40 ORDER BY age ASC, entrydate DESC LIMIT 5; -- 查询 gender 为男且 age 大于等于 20 小于等于 40 的数据, 并且根据 age 升序排序, entrydate 降序排序, 取前 5 条数据
 
 SELECT * FROM emp;
 
