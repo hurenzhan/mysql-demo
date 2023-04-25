@@ -47,6 +47,19 @@ VALUES (1, '00001', '柳岩666', '女', 20, '123456789012345678', '北京', '200
        (15, '00015', '胡青牛', '男', 70, '12345674971234567X', '西安', '2018-04-01'),
        (16, '00016', '周芷若', '女', 18, null, '北京', '2012-06-01');
 
+create table score
+(
+    id      int comment 'ID',
+    name    varchar(20) comment '姓名',
+    math    int comment '数学',
+    english int comment '英语',
+    chinese int comment '语文'
+) comment '学员成绩表';
+insert into score(id, name, math, english, chinese)
+VALUES (1, 'Tom', 67, 88, 95),
+       (2, 'Rose', 23, 66, 90),
+       (3, 'Jack', 56, 98, 76);
+
 
 # 使用数据表
 use itcast;
