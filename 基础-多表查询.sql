@@ -34,7 +34,9 @@
     -- 行子查询：子查询返回的结果是一行值(多列单行)
     -- 表子查询：子查询返回的结果是一张表(多列多行)
 
+CREATE DATABASE itheima;
 USE itheima;
+
 
 # 多对多表结构
 -- _______________________________________________________________________________________
@@ -84,6 +86,7 @@ values (null, 1, 1),
 SELECT * FROM student_course;
 SELECT * FROM student;
 SELECT * FROM course;
+
 -- _______________________________________________________________________________________
 
 # 一对一表结构
@@ -138,8 +141,7 @@ INSERT INTO dept (id, name)
 VALUES (1, '研发部'),
        (2, '市场部'),
        (3, '财务部'),
-       (4,
-        '销售部'),
+       (4, '销售部'),
        (5, '总经办'),
        (6, '人事部');
 
@@ -290,10 +292,10 @@ SELECT *, (SELECT AVG(e1.salary) FROM emp e1 WHERE e1.dept_id = e2.dept_id) 平�
 # 11. 查询所有部门信息，并统计部门的员工人数(子查询)
 -- 表：emp, dept
 -- 连接条件：emp.dept_id = dept.id
-SELECT d.*, COUNT(e.id) FROM emp e, dept d WHERE e.dept_id = d.id GROUP BY d.id;
+SELECT d.name, COUNT(e.id) AS 人数 FROM emp e, dept d WHERE e.dept_id = d.id GROUP BY d.id;
 SELECT d.name, (SELECT COUNT(*) FROM emp e WHERE e.dept_id = d.id) AS 人数 FROM dept d;
 
-# 12. 查询所有学校的选课情况，展示出学生名称、学号、课程名称
+# 12. 查询学校所有的选课情况，展示出学生名称、学号、课程名称
 -- 表：student, course, student_course
 -- 连接条件：student.id = student_course.studentid AND course.id = student_course.courseid
 SELECT s.name, s.no, c.name FROM student s, course c, student_course sc WHERE s.id = sc.studentid AND c.id = sc.courseid;
